@@ -48,13 +48,13 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<User> updateEmployee(@PathVariable Long id,
-                                               @RequestBody User newUser){
+    public ResponseEntity<String> updateEmployee(@PathVariable Long id,
+                                                 @RequestBody User newUser){
         User user = userService.updateUser(id, newUser);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(user);
+                .body("User : " + user.toString() + " was updated succesfully");
     }
 
     @GetMapping("/get/{id}")

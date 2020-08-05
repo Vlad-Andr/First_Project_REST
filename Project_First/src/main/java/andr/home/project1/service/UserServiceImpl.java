@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User addNewUser(User user) {
-        user.setUserId(new Random().nextLong());
+       // user.setUserId(new Random().nextLong());
         userRepo.save(user);
         return user;
     }
