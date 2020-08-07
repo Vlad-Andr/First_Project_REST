@@ -1,8 +1,10 @@
 package andr.home.project1.controller;
 
 import andr.home.project1.model.User;
+import andr.home.project1.service.UserService;
 import andr.home.project1.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,18 +14,17 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
-
 public class UserController {
 
-    @Autowired
-    private UserServiceImpl userService;
+    private final UserService userService;
+
+    public UserController(@Qualifier("userServiceJDBCImpl") UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("/add")
-    public ResponseEntity<User> addUser(@RequestBody User user){
+    public void addUser(@RequestBody User user){
         userService.addNewUser(user);
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .build();
     }
 
     @DeleteMapping("/delete/{id}")
@@ -33,7 +34,7 @@ public class UserController {
 
     @GetMapping("/getAll/{age}")
     public ResponseEntity<List<User>> getAllByAge(@PathVariable int age){
-        List<User> allUsers = userService.getAllUsersByAge(age);
+        List<User> allUsers = userService.allUsersByAge(age);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(allUsers);
@@ -48,20 +49,16 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<User> updateEmployee(@PathVariable Long id,
+    public void updateEmployee(@PathVariable Long id,
                                                @RequestBody User newUser){
-        User user = userService.updateUser(id, newUser);
-
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(user);
+        userService.updateUser(id, newUser);
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Optional<User>> getById(@PathVariable Long id){
-        Optional<User> optionalUser = userService.findById(id);
+    public ResponseEntity<List<User>> getById(@PathVariable Long id){
+        List<User> user = userService.getUserById(id);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(optionalUser);
+                .body(user);
     }
 }
