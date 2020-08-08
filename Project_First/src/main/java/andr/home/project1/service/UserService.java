@@ -3,7 +3,7 @@ package andr.home.project1.service;
 import andr.home.project1.model.User;
 
 import java.util.List;
-
+import java.util.Optional;
 
 public interface UserService {
 
@@ -12,5 +12,5 @@ public interface UserService {
     void deleteUser(Long id);
     void updateUser(Long id, User user);
     List<User> allUsersByAge(int age);
-    List<User> getUserById(Long id);
+    Optional<User> getUserById(Long id);
 }

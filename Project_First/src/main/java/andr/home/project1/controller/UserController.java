@@ -2,7 +2,6 @@ package andr.home.project1.controller;
 
 import andr.home.project1.model.User;
 import andr.home.project1.service.UserService;
-import andr.home.project1.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -16,9 +15,10 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class UserController {
 
+    @Autowired
     private final UserService userService;
 
-    public UserController(@Qualifier("userServiceJDBCImpl") UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -49,14 +49,13 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public void updateEmployee(@PathVariable Long id,
-                                               @RequestBody User newUser){
+    public void updateEmployee(@PathVariable Long id, @RequestBody User newUser){
         userService.updateUser(id, newUser);
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<List<User>> getById(@PathVariable Long id){
-        List<User> user = userService.getUserById(id);
+    public ResponseEntity<Optional<User>> getById(@PathVariable Long id){
+        Optional<User> user = userService.getUserById(id);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(user);
