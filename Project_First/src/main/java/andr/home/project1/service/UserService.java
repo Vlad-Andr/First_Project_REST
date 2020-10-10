@@ -7,10 +7,17 @@ import java.util.Optional;
 
 public interface UserService {
 
-    List<User> getAllUsersByAge(int age);
-    User addNewUser(User user);
-    Iterable<User> allUsers();
+    void addNewUser(User user);
+
+    List<User> allUsers();
+
     void deleteUser(Long id);
-    User updateUser(Long id, User user);
-    Optional<User> findById(Long id);
+
+    void updateUser(Long id, User user);
+
+    List<User> allUsersByAge(int age);
+
+    Optional<User> getUserById(Long id);
+
+    List<User> findUserByMaxAge();
 }
