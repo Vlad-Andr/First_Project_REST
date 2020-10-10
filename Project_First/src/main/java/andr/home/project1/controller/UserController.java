@@ -22,17 +22,17 @@ public class UserController {
     }
 
     @PostMapping("/user/add")
-    public void addUser(@RequestBody User user){
+    public void addUser(@RequestBody User user) {
         userService.addNewUser(user);
     }
 
     @DeleteMapping("/user/delete/{id}")
-    public void deleteUser(@PathVariable Long id){
+    public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }
 
     @GetMapping("/user/getAll/{age}")
-    public ResponseEntity<List<User>> getAllByAge(@PathVariable int age){
+    public ResponseEntity<List<User>> getAllByAge(@PathVariable int age) {
         List<User> allUsers = userService.allUsersByAge(age);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @GetMapping("/admin/getAll")
-    public ResponseEntity<List<User>> getAll(){
+    public ResponseEntity<List<User>> getAll() {
         List<User> all = userService.allUsers();
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -48,13 +48,21 @@ public class UserController {
     }
 
     @PutMapping("/user/update/{id}")
-    public void updateEmployee(@PathVariable Long id, @RequestBody User newUser){
+    public void updateEmployee(@PathVariable Long id, @RequestBody User newUser) {
         userService.updateUser(id, newUser);
     }
 
     @GetMapping("/user/get/{id}")
-    public ResponseEntity<Optional<User>> getById(@PathVariable Long id){
+    public ResponseEntity<Optional<User>> getById(@PathVariable Long id) {
         Optional<User> user = userService.getUserById(id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(user);
+    }
+
+    @GetMapping("/user/getMaxAge")
+    public ResponseEntity<List<User>> getMaxAgeUser() {
+        List<User> user = userService.findUserByMaxAge();
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(user);

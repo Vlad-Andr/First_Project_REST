@@ -44,20 +44,20 @@
         </dependency>
 
 
-       <!-- &lt;!&ndash; https://mvnrepository.com/artifact/com.mchange/c3p0 &ndash;&gt;
-        <dependency>
-            <groupId>com.mchange</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.5.2</version>
-        </dependency>
+        <!-- &lt;!&ndash; https://mvnrepository.com/artifact/com.mchange/c3p0 &ndash;&gt;
+         <dependency>
+             <groupId>com.mchange</groupId>
+             <artifactId>c3p0</artifactId>
+             <version>0.9.5.2</version>
+         </dependency>
 
 
-        &lt;!&ndash; https://mvnrepository.com/artifact/org.hibernate/hibernate-c3p0 &ndash;&gt;
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-c3p0</artifactId>
-            <version>5.4.19.Final</version>
-        </dependency>-->
+         &lt;!&ndash; https://mvnrepository.com/artifact/org.hibernate/hibernate-c3p0 &ndash;&gt;
+         <dependency>
+             <groupId>org.hibernate</groupId>
+             <artifactId>hibernate-c3p0</artifactId>
+             <version>5.4.19.Final</version>
+         </dependency>-->
 
         <!--<dependency>
             <groupId>com.h2database</groupId>

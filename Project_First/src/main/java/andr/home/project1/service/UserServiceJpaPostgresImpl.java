@@ -19,6 +19,7 @@ public class UserServiceJpaPostgresImpl implements UserService, UserDetailsServi
 
     @Autowired
     private UserRepo userRepo;
+
     @Override
     public void addNewUser(User user) {
         userRepo.save(user);
@@ -53,5 +54,10 @@ public class UserServiceJpaPostgresImpl implements UserService, UserDetailsServi
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepo.findUserByFirstName(username).get();
+    }
+
+    @Override
+    public List<User> findUserByMaxAge() {
+        return userRepo.findByAgeWhereCountLettersMax();
     }
 }
